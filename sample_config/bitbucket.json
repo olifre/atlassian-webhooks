@@ -1,0 +1,32 @@
+{
+  "alert_mail": "Admin A <admin.a@example.com>, Admin B <admin.b@example.com>",
+  "continue_on_error": false,
+  "background": false,
+  "from_mail": "Webhook script <noreply@example.com>",
+  "reply_to_mail": "support@example.com",
+  "PROJKEY": {
+    "test": {
+      "secret": "s0m3Th1n6_v3rY_$ecr3T",
+      "refs/heads/master": {
+        "notice_mail": "Expert A <expert.a@example.com>, Admin A <admin.a@example.com>",
+        "continue_on_error": true,
+        "background": true,
+        "commands": [
+          "echo \"Someone pushed to the master branch of the test repo, go quick and have a look!\" | mail -s \"Test repo push\" someone@example.com",
+          "sleep 30",
+          "/bin/false",
+          "/bin/this_command_does_not_exist_I_believe"
+        ]
+      },
+      "refs/heads/dev": {
+        "notice_mail": "Expert A <expert.a@example.com>, Admin A <admin.a@example.com>",
+        "alert_main": "",
+        "continue_on_error": false,
+        "background": false,
+        "commands": [
+          "echo \"This can never fail!\" | mail -s \"Unbreakable test repo push\" someone@somehwere.else"
+        ]
+      }
+    }
+  }
+}
