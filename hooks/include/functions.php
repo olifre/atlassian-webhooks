@@ -44,8 +44,8 @@ function validate_hmac($body, $secret, $x_hub_signature) {
 function extract_from_json($json, $json_path, $desc='JSON', $val_type='string') {
   $json_deep = $json;
   $current_path = array();
-  $path_part = strtok($json_path, '->');
-  while ($path_part !== false) {
+  $path_parts = explode('->', $json_path);
+  foreach ($path_parts as $path_part) {
     if (!is_object($json_deep)) {
       fatal_error("Does not contain an object at ".implode('->',$current_path)."!", $desc);
     }
@@ -76,7 +76,6 @@ function extract_from_json($json, $json_path, $desc='JSON', $val_type='string') 
       array_push($current_path, $path_part);
     }
     //echo $path_part." was ok\r\n";
-    $path_part = strtok('->');
   }
   switch ($val_type) {
     case "string":
