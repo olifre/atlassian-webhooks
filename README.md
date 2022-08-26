@@ -40,6 +40,12 @@ The following configuration knobs exist:
    Possible levels in configuration file: Global, Project, Repository, Ref-Id.  
    Example value: `Expert A <expert.a@example.com>, Admin A <admin.a@example.com>`
 
+- `description` (String, optional, on project level or below)  
+   The provided description will be echoed during webhook execution.  
+   This provides a comment / naming functionality.  
+   Possible levels in configuration file: Project, Repository, Ref-Id.  
+   Example value: `Syncing code, configuration stored in /etc/synccode.conf`
+
 - `continue_on_error` (Boolean, required on Global level)  
    If set to `true`, abort when the first command fails. Otherwise, continues execution.  
 

@@ -11,6 +11,7 @@
         "notice_mail": "Expert A <expert.a@example.com>, Admin A <admin.a@example.com>",
         "continue_on_error": true,
         "background": true,
+        "description": "Syncing code, configuration stored in /etc/synccode.conf",
         "commands": [
           "echo \"Someone pushed to the master branch of the test repo, go quick and have a look!\" | mail -s \"Test repo push\" someone@example.com",
           "sleep 30",

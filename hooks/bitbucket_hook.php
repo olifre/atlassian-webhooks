@@ -86,6 +86,7 @@ $continue_on_error = extract_from_json($config, "continue_on_error", "Configurat
 $background = extract_from_json($config, "background", "Configuration::GetBackground::Global", "bool");
 $from_mail = extract_from_json($config, "from_mail", "Configuration::GetFromMail::Global", "string");
 $reply_to_mail = extract_from_json($config, "reply_to_mail", "Configuration::GetReplyToMail::Global", "string");
+$description = "";
 foreach ($config_levels as $cfg_level) {
   $level_var = $cfg_level."_config";
   if (property_exists($$level_var, "alert_mail")) {
@@ -105,6 +106,9 @@ foreach ($config_levels as $cfg_level) {
   }
   if (property_exists($$level_var, "reply_to_mail")) {
     $reply_to_mail = extract_from_json($$level_var, "reply_to_mail", "Configuration::GetReplyToMail::".$cfg_level, "string");
+  }
+  if (property_exists($$level_var, "description")) {
+    $description = extract_from_json($$level_var, "description", "Configuration::GetDescription::".$cfg_level, "string");
   }
 }
 
@@ -129,7 +133,11 @@ if ($background) {
 $fail_cnt = 0;
 $out = "";
 $cmd_cnt = count($ref_cmds);
-printout($out, "Received valid hook for ".$project_key."/".$repository_name.":".$affected_ref_id.", executing ".$cmd_cnt." configured commands...");
+printout($out, "Received valid hook for ".$project_key."/".$repository_name.":".$affected_ref_id.".");
+if (!empty($description)) {
+  printout($out, "Description: ".$description);
+}
+printout($out, "Executing ".$cmd_cnt." configured commands...");
 printout($out, "");
 
 if ($background) {
