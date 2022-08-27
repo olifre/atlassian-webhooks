@@ -43,6 +43,7 @@ The following configuration knobs exist:
 - `description` (String, optional, on project level or below)  
    The provided description will be echoed during webhook execution.  
    This provides a comment / naming functionality.  
+   If set to an empty string (implicit default), the description is not added to the output.  
    Possible levels in configuration file: Project, Repository, Ref-Id.  
    Example value: `Syncing code, configuration stored in /etc/synccode.conf`
 
