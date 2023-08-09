@@ -10,6 +10,12 @@ if (count(get_included_files()) == 1) {
 }
 
 function fatal_error($msg, $prefix='') {
+  if (ob_get_contents() !== false) {
+    // Output buffering is active, flush output.
+    // Flush all output:
+    ob_end_flush(); // Strange behaviour, will not work
+    flush();        // Unless both are called !
+  }
   if ($prefix != '') {
     die("[".$prefix."] ".$msg."\r\n");
   } else {

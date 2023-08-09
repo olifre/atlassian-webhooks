@@ -170,6 +170,8 @@ if ($background) {
   header("Content-Length: $size");
   ob_end_flush(); // Strange behaviour, will not work
   flush();        // Unless both are called !
+  // Start a new output buffer, which will be discarded at the end - nobody is listening to any echo anymore:
+  ob_start();
   printout($out, "Now starting the real work...\r\n");
 }
 
@@ -239,6 +241,15 @@ if ($fail_cnt == 0) {
   } else {
     printout($out, "Not sending out alert mail(s), alert_mail unset or set to empty string.");
   }
+}
+
+if ($background) {
+  // Discard any remaining output, nobody listens anyways (may cause issues otherwise!).
+  ob_end_clean();
+} else {
+  // Flush all output:
+  ob_end_flush(); // Strange behaviour, will not work
+  flush();        // Unless both are called !
 }
 
 ?>
